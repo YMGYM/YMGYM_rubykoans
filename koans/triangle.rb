@@ -14,11 +14,20 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-    cnt = 0
-	cnt += 1 if a == b
-	cnt += 1 if b == c
-	cnt += 1 if a == c
 	
+	a, b, c = [a, b, c].sort
+	
+	if c >= (a + b)
+		raise TriangleError
+	elsif a <= 0 || b <= 0 || c <= 0
+		raise TriangleError
+	else
+		cnt = 0
+		cnt += 1 if a == b
+		cnt += 1 if b == c
+		cnt += 1 if a == c
+	end
+		
 	if cnt == 3
 		return :equilateral
 	elsif cnt == 1
