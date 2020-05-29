@@ -29,9 +29,37 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 #
 # Your goal is to write the score method.
 
+
 def score(dice)
   # You need to write this method
+	points = 0
+	freq = [0, 0, 0, 0, 0, 0]
+	dice.each do |d|
+		freq[d - 1] += 1
+	end
+	
+	freq.each_with_index do |f, i|
+		if f >= 3
+			if i == 0
+				points += 1000 + (f-3) * 100
+			elsif i == 4
+				points += 500 + (f-3) * 50
+			else
+				points += (i + 1) * 100
+			end
+		else
+			if i == 0
+				points += f * 100
+			elsif i == 4
+				points += f * 50
+			end
+		end
+		
+	end
+	
+	return points
 end
+
 
 class AboutScoringProject < Neo::Koan
   def test_score_of_an_empty_list_is_zero
